@@ -1,5 +1,6 @@
 package org.ffff.meetme.auth;
 
+import org.ffff.meetme.model.AdapterInfo;
 import org.ffff.meetme.model.Contact;
 
 import java.util.List;
@@ -23,9 +24,7 @@ import java.util.List;
 
 public interface AuthAdapter {
 
-    public String getAppId();
-
-    public String getOAuthURL();
+    public AdapterInfo getAdapterInfo();
 
     public boolean login();
 

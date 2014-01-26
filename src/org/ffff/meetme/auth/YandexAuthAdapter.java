@@ -1,5 +1,6 @@
 package org.ffff.meetme.auth;
 
+import org.ffff.meetme.model.AdapterInfo;
 import org.ffff.meetme.model.Contact;
 
 import java.util.List;
@@ -22,14 +23,23 @@ import java.util.List;
  */
 
 public class YandexAuthAdapter implements AuthAdapter {
-    @Override
-    public String getAppId() {
-        return "dd6fd59ec1224fb4990daaf788d01b67";
-    }
+
+    private AdapterInfo adapterInfo =
+            new AdapterInfo(
+                    "http://api.yandex.ru/login/doc/dg/images/login-with-yandex-6.png",
+                    "dd6fd59ec1224fb4990daaf788d01b67",
+                    "https://oauth.yandex.ru/authorize?response_type=token&client_id=dd6fd59ec1224fb4990daaf788d01b67", "Yandex");
 
     @Override
-    public String getOAuthURL() {
-        return String.format("https://oauth.yandex.ru/authorize?response_type=token&client_id=%s", getAppId());
+    public AdapterInfo getAdapterInfo() {
+        return adapterInfo;
+    }
+
+    public void setAdapterInfo(AdapterInfo adapterInfo) {
+        this.adapterInfo = adapterInfo;
+    }
+
+    public YandexAuthAdapter() {
     }
 
     @Override
