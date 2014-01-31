@@ -1,10 +1,13 @@
 package org.ffff.meetme.web;
 
+import org.ffff.meetme.model.Contact;
+
 /**
  * Created by flicus on 26.01.14.
  */
 public class WebUser {
     private boolean loggedIn = false;
+    private Contact contact;
 
     public WebUser() {
     }
@@ -26,5 +29,13 @@ public class WebUser {
 
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 }

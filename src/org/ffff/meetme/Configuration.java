@@ -5,8 +5,9 @@ package org.ffff.meetme;
  */
 public class Configuration {
 
-    private String webRoot = "d:\\java\\git\\meetme\\web";
-    private int port = 8080;
+    //private String webRoot = "d:\\java\\git\\meetme\\web";
+    private String webRoot = "/opt/meetme/web";
+    private int port = 9090;
 
     public int getPort() {
         return port;

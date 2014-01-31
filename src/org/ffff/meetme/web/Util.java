@@ -47,8 +47,12 @@ public class Util {
         while (pairs.hasMoreTokens()) {
             final String pair = pairs.nextToken();
             final StringTokenizer parts = new StringTokenizer(pair, "=");
-            final String name = URLDecoder.decode(parts.nextToken(), "ISO-8859-1");
-            final String value = URLDecoder.decode(parts.nextToken(), "ISO-8859-1");
+            String name = "";
+            String value = "";
+            if (parts.hasMoreTokens())
+                name = URLDecoder.decode(parts.nextToken(), "ISO-8859-1");
+            if (parts.hasMoreTokens())
+                value = URLDecoder.decode(parts.nextToken(), "ISO-8859-1");
             qps.put(name, value);
         }
         return qps;
@@ -57,7 +61,7 @@ public class Util {
     public static String makeQueryString(final Map<String, String> items, String token) throws UnsupportedEncodingException {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, String> entry : items.entrySet()) {
-            sb.append(URLEncoder.encode(entry.getKey(), "ISO-8859-1")).append("=").append(URLEncoder.encode(entry.getValue(),"ISO-8859-1")).append(token);
+            sb.append(URLEncoder.encode(entry.getKey(), "ISO-8859-1")).append("=").append(URLEncoder.encode(entry.getValue(), "ISO-8859-1")).append(token);
         }
         return sb.toString();
     }

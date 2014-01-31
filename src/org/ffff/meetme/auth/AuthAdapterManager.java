@@ -1,5 +1,7 @@
 package org.ffff.meetme.auth;
 
+import org.ffff.meetme.model.AdapterInfo;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,10 +11,11 @@ import java.util.Map;
  */
 public class AuthAdapterManager {
 
-    private Map<String, AuthAdapter> adapters = new HashMap<String, AuthAdapter>();
+    private Map<String, AdapterInfo> adapters = new HashMap();
 
     {
-        adapters.put("yandex", new YandexAuthAdapter());
+        adapters.put("yandex", YandexAuthAdapter.adapterInfo);
+        adapters.put("vk", VKAuthAdapter.adapterInfo);
 
     }
 
@@ -20,14 +23,26 @@ public class AuthAdapterManager {
 
     }
 
-    public Collection<AuthAdapter> getAdapters() {
+    public Collection<AdapterInfo> getAdapterInfos() {
         return adapters.values();
     }
 
-    public AuthAdapter getAdapter(String id) {
+    public AdapterInfo getAdapterInfo(String id) {
         return adapters.get(id);
     }
 
+    public AuthAdapter makeAuthAdapter(String providerId) {
+        Class clazz = adapters.get(providerId).getAdapterClass();
+        AuthAdapter obj = null;
+        try {
+            obj = (AuthAdapter)clazz.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
 
     private final static class Singleton {
         final static AuthAdapterManager instanse = new AuthAdapterManager();

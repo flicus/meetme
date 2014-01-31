@@ -1,4 +1,4 @@
-<project name="eva" default="pack" xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="meetme" default="pack" xmlns:ivy="antlib:org.apache.ivy.ant">
 
     <property name="ivy.install.version" value="2.3.0"/>
     <property name="ivy.jar.dir" value="${basedir}/ivy"/>
@@ -76,8 +76,8 @@
         <copy todir="${out.dir}">
             <fileset dir="${basedir}/etc" includes="**/*.*"/>
         </copy>
-        <copy todir="${out.dir}/webroot">
-            <fileset dir="${basedir}/webroot" includes="**/*.*"/>
+        <copy todir="${out.dir}/web">
+            <fileset dir="${basedir}/web" includes="**/*.*"/>
         </copy>
     </target>
 

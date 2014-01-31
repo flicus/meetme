@@ -1,5 +1,8 @@
 package org.ffff.meetme.auth;
 
+import com.google.gson.Gson;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.ffff.meetme.model.AdapterInfo;
 import org.ffff.meetme.model.Contact;
 
@@ -22,11 +25,25 @@ import java.util.List;
  * $Id:
  */
 
-public interface AuthAdapter {
+public abstract class AuthAdapter {
 
-    public AdapterInfo getAdapterInfo();
+    protected CloseableHttpClient httpclient = HttpClients.createDefault();
+    protected String error = null;
 
-    public boolean login();
+    protected String token;
+    protected Gson gson = new Gson();
 
-    public List<Contact> getContacts();
+    public String getError() {
+        return error;
+    }
+
+    public abstract AdapterInfo getAdapterInfo();
+
+    public abstract boolean login();
+
+    public abstract Contact getUserInfo();
+
+    public abstract List<Contact> getContacts();
+
+    public abstract boolean doStep2(String code);
 }

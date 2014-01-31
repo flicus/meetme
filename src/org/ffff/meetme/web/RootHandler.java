@@ -15,7 +15,7 @@ public class RootHandler implements HttpRequestHandler {
 
     public static String newline = System.getProperty("line.separator");
     private static final Logger log = Logger.getLogger(RootHandler.class);
-    private static final Pattern pattern = Pattern.compile("/meetme/(.+?)/.+");
+    private static final Pattern pattern = Pattern.compile("/meetme/(.*?)/.*");
 
     private StaticContentHandler staticContentHandler;
     private ApiHandler apiHandler;
@@ -46,13 +46,12 @@ public class RootHandler implements HttpRequestHandler {
             } else {
                 token = SessionManager.getInstance().makeNewToken();
                 context.setAttribute("mmsid", token);
-                cookies.put("mssid", token);
-                response.setHeader("Cookie", Util.makeQueryString(cookies, ";"));
+                response.setHeader("Set-cookie", "mmsid="+token);
             }
         } else {
             String token = SessionManager.getInstance().makeNewToken();
             context.setAttribute("mmsid", token);
-            response.setHeader("Cookie", "mmsid=" + token);
+            response.setHeader("Set-cookie", "mmsid=" + token);
         }
 
         if ("/meetme/".equals(urlStrings[0])) {
